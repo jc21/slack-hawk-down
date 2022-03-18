@@ -4,14 +4,14 @@ Slack-flavored markdown as HTML
 
 ## Installation
 ```
-npm install --save slack-hawk-down
+npm install --save @jc21/slack-hawk-down
 ```
 
 ## Usage
 
 ### Render universal Slack markdown as HTML
 ```
-import { escapeForSlack, escapeForSlackWithMarkdown } from 'slack-hawk-down'
+import { escapeForSlack, escapeForSlackWithMarkdown } from '@jc21/slack-hawk-down'
 
 escapeForSlack(':wave:') // => '&#1168;'
 escapeForSlackWithMarkdown('`this is a code block`) // => '<span class="slack_code">this is a code block</span>'

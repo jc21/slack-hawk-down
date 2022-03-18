@@ -1,6 +1,6 @@
 {
-  "name": "slack-hawk-down",
-  "version": "0.4.1",
+  "name": "@jc21/slack-hawk-down",
+  "version": "0.5.0",
   "description": "Render Slack flavored markdown as HTML",
   "main": "dist/bundle.js",
   "scripts": {
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/swiftype/slack-hawk-down.git"
+    "url": "git+https://github.com/jc21/slack-hawk-down.git"
   },
   "keywords": [
     "slack",
@@ -107,5 +107,8 @@
       ],
       "no-continue": 0
     }
+  },
+  "directories": {
+    "test": "test"
   }
 }
