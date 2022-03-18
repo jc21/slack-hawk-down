@@ -1,6 +1,6 @@
 {
   "name": "@jc21/slack-hawk-down",
-  "version": "0.5.0",
+  "version": "0.5.2",
   "description": "Render Slack flavored markdown as HTML",
   "main": "dist/bundle.js",
   "scripts": {
@@ -23,9 +23,9 @@
   "author": "Alec Hoey",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/swiftype/slack-hawk-down/issues"
+    "url": "https://github.com/jc21/slack-hawk-down/issues"
   },
-  "homepage": "https://github.com/swiftype/slack-hawk-down#readme",
+  "homepage": "https://github.com/jc21/slack-hawk-down#readme",
   "dependencies": {
     "xregexp": "^4.2.4"
   },

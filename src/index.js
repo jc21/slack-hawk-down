@@ -30,7 +30,8 @@ const expandEmoji = (text, customEmoji) => {
 
 const closingDivPatternString = '</div>'
 const closingSpanPatternString = '</span>'
-const codeDivOpeningPatternString = '<div class="slack_code">'
+const codeDivOpeningPatternString = '<code class="slack_code">'
+const codeDivClosingPatternString = '</code>'
 const codeSpanOpeningPatternString = '<span class="slack_code">'
 const boldOpeningPatternString = '<span class="slack_bold">'
 const strikethroughOpeningPatternString = '<span class="slack_strikethrough">'
@@ -116,7 +117,8 @@ const replaceInWindows = (
     partitionWindowOnMatch,
     spacePadded,
     asymmetric,
-    replaceNewlines
+    replaceNewlines,
+    trimText,
   } = options
   let { maxReplacements } = options
 
@@ -175,7 +177,8 @@ const replaceInWindows = (
       const closingReplacementString = `${replacementClosingLiteral}${spacePadded ? closingMatch.closingCapturedWhitespace : ''}${asymmetric ? closingMatch[0] : ''}`
 
       const textBetweenDelimiters = text.slice(openingMatch.index + openingMatch[0].length, closingMatch.index)
-      const replacedTextBetweenDelimiters = replaceNewlines ? XRegExp.replace(textBetweenDelimiters, newlineRegExp, lineBreakTagLiteral) : textBetweenDelimiters
+      const trimmedTextBetweenDelimiters = trimText ? textBetweenDelimiters.trim() : textBetweenDelimiters
+      const replacedTextBetweenDelimiters = replaceNewlines ? XRegExp.replace(trimmedTextBetweenDelimiters, newlineRegExp, lineBreakTagLiteral) : trimmedTextBetweenDelimiters
 
       const replacedDelimiterText = [
         openingReplacementString,
@@ -226,7 +229,7 @@ const replaceInWindows = (
 const expandText = (text) => {
   let expandedTextAndWindows
   expandedTextAndWindows = { text: text, windows: [[0, text.length]] }
-  expandedTextAndWindows = replaceInWindows(expandedTextAndWindows.text, '```', codeDivOpeningPatternString, closingDivPatternString, expandedTextAndWindows.windows, { partitionWindowOnMatch: true, replaceNewlines: true })
+  expandedTextAndWindows = replaceInWindows(expandedTextAndWindows.text, '```', codeDivOpeningPatternString, codeDivClosingPatternString, expandedTextAndWindows.windows, { partitionWindowOnMatch: true, trimText: true })
   expandedTextAndWindows = replaceInWindows(expandedTextAndWindows.text, '`', codeSpanOpeningPatternString, closingSpanPatternString, expandedTextAndWindows.windows, { partitionWindowOnMatch: true })
   expandedTextAndWindows = replaceInWindows(expandedTextAndWindows.text, '*', boldOpeningPatternString, closingSpanPatternString, expandedTextAndWindows.windows, { maxReplacements: 100 })
   expandedTextAndWindows = replaceInWindows(expandedTextAndWindows.text, '~', strikethroughOpeningPatternString, closingSpanPatternString, expandedTextAndWindows.windows, { maxReplacements: 100 })
